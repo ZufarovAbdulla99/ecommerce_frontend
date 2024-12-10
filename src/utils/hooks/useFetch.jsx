@@ -25,6 +25,5 @@ export function useFetch(url) {
 
     fetchData();
   }, [url]);
-  console.log(url)
   return { data, isLoading, error };
 }

@@ -1,19 +1,32 @@
-// import React, { useContext } from "react";
-
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-
-// import { IoMdArrowForward } from "react-icons/io";
-// import { FiTrash2 } from "react-icons/fi";
 import { ArrowRight, Trash2 } from "lucide-react"
+
+import { CartContext } from "../contexts/CartContext";
 
 // import CartItem from "../components/CartItem";
 // import { SidebarContext } from "../contexts/SidebarContext";
-// import { CartContext } from "../contexts/CartContext";
 
 const Sidebar = ({isOpen, handleClose}) => {
-//   const { isOpen, handleClose } = useContext(SidebarContext);
-//   const { cart, clearCart, itemAmount, total } = useContext(CartContext);
-    // let isOpen = true
+  // const { isOpen, handleClose } = useContext(SidebarContext);
+  // const { cart, clearCart, itemAmount, total } = useContext(CartContext);
+  // let isOpen = true
+
+  const { cart } = useContext(CartContext);
+  
+  function allProductsCount() {
+    let totalCount = cart.reduce((acc, productObject) => {
+      return acc + productObject.count
+    }, 0)
+    return totalCount
+  }
+
+  function totalPrice() {
+    let totalPrice = cart.reduce((acc, productObject) => {
+      return acc + productObject.count * productObject.product.price
+    }, 0)
+    return totalPrice
+  }
 
   return (
     <div
@@ -22,7 +35,7 @@ const Sidebar = ({isOpen, handleClose}) => {
       } "w-full bg-white fixed top-0 h-full shadow-2xl md:w-[35vw] lg:w-[40vw] xl:max-w-[30vw] transition-all duration-300 z-20 px-4 lg:px-[35px]"`}
     >
       <div className="flex items-center justify-between py-6 border-b">
-        <div className="uppercase text-sm font-semibold">Cart (3)</div>
+        <div className="uppercase text-sm font-semibold">Carts count: {allProductsCount()}</div>
         <div
         //   onClick={handleClose}
           className="cursor-poniter w-8 h-8 flex justify-center items-center"
@@ -42,7 +55,7 @@ const Sidebar = ({isOpen, handleClose}) => {
           <div className="font-semibold">
             <span className="mr-2">Subtotal:</span> ${" "}
             {/* {parseFloat(total).toFixed(2)} */}
-            12.33
+            { parseFloat(totalPrice()).toFixed(2) }
           </div>
           {/* clear cart icon */}
           <div

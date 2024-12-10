@@ -1,13 +1,31 @@
-import { createContext, useContext, useReducer } from "react"
+import { createContext, useContext, useReducer, useState } from "react"
 
 export const CartContext = createContext();
 
 function reducer(state, action) {
-    return state
+    switch(action.type){
+        case "add":
+            return [
+                ...state,
+                { product: action.product, count: action.count },
+            ]
+        default:
+            return state
+    }
 }
 
 const CartProvider = ({children}) => {
-    const [cart, dispatch] = useReducer(reducer, [1, 2])
+    const [cart, dispatch] = useReducer(reducer, [])
+    console.log(cart, "*")
+
+    // function productHasCart(id) {
+    //     // console.log(cart)
+    //     let [productId] = cart.map((cartItem) => {
+    //       if(cartItem.product.id === id) return true
+    //       else return false
+    //     })
+    //     return productId
+    //   }
 
     return (
         <CartContext.Provider value={{ cart, dispatch }}>

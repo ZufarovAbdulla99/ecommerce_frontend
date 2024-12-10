@@ -1,17 +1,21 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-
-// import { BsPlus, BsEyeFill } from "react-icons/bs";
-
-// import { CartContext } from "../contexts/CartContext";
-
 import { Plus, Eye } from "lucide-react"
 
+import { CartContext } from "../contexts/CartContext";
+
 const Product = ({ product }) => {
-//   const { addToCart } = useContext(CartContext);
+  const { cart, dispatch } = useContext(CartContext);
+  const [count, setCount] = useState(1)
 
   // destructure product
   const { id, image, category, title, price } = product;
+
+  function productHasCart(id) {
+    return cart.some((cartItem) => cartItem.product.id === id);
+  }
+  
+
   return (
     <div>
       <div className="border border-[#e4e4e4] h-[300px] mb-4 relative overflow-hidden group transition">
@@ -28,8 +32,9 @@ const Product = ({ product }) => {
         {/* buttons */}
         <div className="border absolute top-6 -right-11 group-hover:right-5 p-2 flex flex-col justify-center items-center gap-y-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
           {/* <button onClick={() => addToCart(product, id)}> */}
-          <button>
-            <div className="flex justify-center items-center text-white w-12 h-12 bg-teal-500">
+          <button onClick={() => dispatch({type: "add", product: product, count: count})} disabled={productHasCart(id)}>
+            <div className={`flex justify-center items-center text-white w-12 h-12 
+              ${productHasCart(id) ? "bg-gray-400" :"bg-teal-500"}`}>
               <Plus className="text-3xl"/>
             </div>
           </button>
