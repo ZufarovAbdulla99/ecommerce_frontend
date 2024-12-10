@@ -1,8 +1,6 @@
-import bgHero from "../assets/images/bghero.jpg"
-
 const Hero = () => {
 
-    return <section className="h-[800px] bg-hero bg-no-repeat bg-cover bg-center py-20" style={{background: `url(${bgHero})`}}>
+    return <section className="h-[800px] bg-hero bg-no-repeat bg-cover bg-center py-20">
         <div className="container mx-auto flex justify-around h-full">
             <div className="flex flex-col justify-center">
                 <div className="font-semibold flex items-center uppercase">

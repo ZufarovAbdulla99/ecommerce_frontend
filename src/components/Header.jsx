@@ -6,7 +6,7 @@ import logo from "../assets/icons/logo.svg"
 import { useCart } from "../contexts/CartContext"
 
 
-const Header = () => {
+const Header = ({handleSideBarOpen}) => {
     const [isActive, setIsActive] = useState(false)
     const {cart} = useCart()
 
@@ -34,7 +34,7 @@ const Header = () => {
             </a>
 
             <button className="relative">
-                <ShoppingBag className="w-7 h-7"/>
+                <ShoppingBag className="w-7 h-7" onClick={handleSideBarOpen}/>
                 <span className="absolute -bottom-1 -right-1 text-xs bg-red-500 text-white rounded-full min-w-4">{cart.length}</span>
             </button>
         </div>
