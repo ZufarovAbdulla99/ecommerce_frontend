@@ -9,6 +9,35 @@ function reducer(state, action) {
                 ...state,
                 { product: action.product, count: action.count },
             ]
+        case "increase_of_count":{
+            const updatedCart = state.map((item) => {
+                if(item.product.id === action.id){
+                    // console.log({product: {...item.product}, count: item.count + 1})
+                    return {product: {...item.product}, count: item.count + 1}
+                }
+                else{
+                    return item
+                }
+            })
+            return updatedCart
+        }
+        case "decrease_of_count":{
+            const updatedCart = state.map((item) => {
+                if(item.product.id === action.id){
+                    return {product: {...item.product}, count: item.count - 1}
+                }
+                else{
+                    return item
+                }
+            })
+            return updatedCart
+        }
+        case "delete_item": {
+            return state.filter((item) => item.product.id !== action.id)
+        }
+        case "clear_cart": {
+            return []
+        }
         default:
             return state
     }
@@ -16,7 +45,7 @@ function reducer(state, action) {
 
 const CartProvider = ({children}) => {
     const [cart, dispatch] = useReducer(reducer, [])
-    console.log(cart, "*")
+    // console.log(cart, "*")
 
     // function productHasCart(id) {
     //     // console.log(cart)

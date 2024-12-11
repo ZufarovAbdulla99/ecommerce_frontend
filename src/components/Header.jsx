@@ -33,7 +33,7 @@ const Header = ({handleSideBarOpen}) => {
                 </div>
             </a>
 
-            <button className="relative">
+            <button className="relative sidebar">
                 <ShoppingBag className="w-7 h-7" onClick={handleSideBarOpen}/>
                 <span className="absolute -bottom-1 -right-1 text-xs bg-red-500 text-white rounded-full min-w-4">{cart.length}</span>
             </button>

@@ -11,6 +11,8 @@ const Product = ({ product }) => {
   // destructure product
   const { id, image, category, title, price } = product;
 
+  // console.log(product)
+
   function productHasCart(id) {
     return cart.some((cartItem) => cartItem.product.id === id);
   }
