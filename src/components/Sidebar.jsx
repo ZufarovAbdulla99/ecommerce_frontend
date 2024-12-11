@@ -21,11 +21,11 @@ const Sidebar = ({isOpen, handleClose}) => {
 
   useEffect(() => {
     function watchClick(e) {
-      // if (isOpen && !e.target.closest("[class*=sidebar]")) {
+      if (isOpen && !e.target.closest("[class*=sidebar]")) {
       // if (isOpen && e.target.closest("[:notclass*=sidebar]")) {
         // console.log(e.target.closest("[class*=sidebar]"))
         // console.log(e.target.closest(".sidebar"), "ZZ")
-      if (isOpen && !e.target.closest(".sidebar")) {
+      // if (isOpen && !e.target.closest(".sidebar")) {
         handleClose();
         // console.log("CLOSE")
       }
@@ -44,7 +44,7 @@ const Sidebar = ({isOpen, handleClose}) => {
     <div
       className={`${
         isOpen ? "right-0" : "-right-full"
-      } "w-full bg-white fixed top-0 h-full shadow-2xl md:w-[35vw] lg:w-[40vw] xl:max-w-[30vw] sidebar transition-all duration-300 z-20 px-4 lg:px-[35px]"`}
+      } flex flex-col w-full pb-10 bg-white fixed top-0 h-full shadow-2xl md:w-[48vw] lg:w-[40vw] xl:max-w-[30vw] sidebar transition-all duration-300 z-20 px-4 lg:px-9`}
     >
       <div className="flex items-center justify-between py-6 border-b">
         <div className="uppercase text-sm font-semibold">Carts count: {allProductsCount()}</div>
@@ -55,12 +55,12 @@ const Sidebar = ({isOpen, handleClose}) => {
           <ArrowRight className="text-2xl cursor-pointer" onClick={handleClose} />
         </div>
       </div>
-      <div className="flex flex-col gap-y-2 h-[360px] md:h-[480px] lg:h-[420px] overflow-y-auto overflow-x-hidden border-b">
+      <div className="flex grow flex-col gap-y-2 h-[360px] md:h-[480px] lg:h-[420px] overflow-y-auto overflow-x-hidden border-b">
         {cart.map((item) => {
             return <CartItem item={item} key={item.product.id} />
         })}
       </div>
-      <div className="flex flex-col gap-y-3  mt-4">
+      <div className="flex flex-col gap-y-3 mt-4">
         <div className="flex w-full justify-between items-center">
           {/* total */}
           <div className="font-semibold">

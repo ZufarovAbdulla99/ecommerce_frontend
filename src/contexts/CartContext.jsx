@@ -4,8 +4,8 @@ export const CartContext = createContext();
 
 function reducer(state, action) {
   switch (action.type) {
-    case "add":
-      return [...state, { product: action.product, count: action.count }];
+    case "add_to_cart":
+      return [...state, { product: action.payload, count: action.count }];
     case "increase_of_count": {
       const updatedCart = state.map((item) => {
         if (item.product.id === action.id) {
@@ -42,7 +42,7 @@ const CartProvider = ({ children }) => {
   const [cart, dispatch] = useReducer(reducer, []);
 
   function addToCart(product) {
-    dispatch({ type: "ADD_TO_CART", payload: product });
+    dispatch({ type: "add_to_cart", payload: product, count: 1 });
   }
 
   const allProductsCount = function () {

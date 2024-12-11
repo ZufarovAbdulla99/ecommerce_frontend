@@ -4,7 +4,6 @@ import { useCart } from "../contexts/CartContext";
 import { RefreshCcw } from "lucide-react";
 
 const ProductDetails = () => {
-  const API_URL = "https://fakestoreapi.com/products";
 
   const { id } = useParams();
   const { cart, addToCart } = useCart();
@@ -17,7 +16,8 @@ const ProductDetails = () => {
   } = useFetch(`https://fakestoreapi.com/products/${id}`);
   // console.log(data)
 
-  const disabled = cart.some((product) => product.id == id);
+  const disabled = cart.some((product) => product.product.id == id);
+  console.log(disabled)
 
   if (isLoading) {
     return (
