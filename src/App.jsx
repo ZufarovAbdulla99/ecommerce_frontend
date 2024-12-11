@@ -1,5 +1,5 @@
 // import { AArrowUp } from "lucide-react"
-import {Header, Sidebar} from "./components"
+import {Footer, Header, Sidebar} from "./components"
 import {CartContext} from "./contexts"
 import { Route, Routes } from "react-router-dom"
 import { Home, ProductDetails } from "./pages"
@@ -22,6 +22,7 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/product/:id" element={<ProductDetails />}></Route>
       </Routes>
+      <Footer></Footer>
     </CartContext>
   </div>
 }
